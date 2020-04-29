@@ -1,10 +1,9 @@
 import React from 'react';
-
-import { Provider } from 'react-redux';
+import { Switch, Route } from 'react-router-dom';
 
 const App = () => (
   <div>
-      
+      test
   </div>
 );
 
