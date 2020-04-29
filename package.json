@@ -1,0 +1,20 @@
+{
+  "name": "loadup-weather",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kluAA/loadup-weather.git"
+  },
+  "keywords": [],
+  "author": "Kevin Lu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kluAA/loadup-weather/issues"
+  },
+  "homepage": "https://github.com/kluAA/loadup-weather#readme"
+}
