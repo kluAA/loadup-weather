@@ -3,15 +3,19 @@ import React from 'react';
 class Weather extends React.Component {
     constructor(props) {
         super(props);
-        this.getLocation = this.getLocation.bind(this);
+        this.getWeather = this.getWeather.bind(this);
     }
 
-    getLocation(e) {
+    getWeather() {
         if (navigator.geolocation) {
+            // grabs lat, lon coords
             navigator.geolocation.getCurrentPosition(position => {
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
-                console.log(lat, lon);
+
+                //api request to fetch current weather data
+                this.props.fetchWeatherByCoords(lat, lon)
+                    .then(weather => console.log(weather));
             });
         } 
         else {
@@ -22,8 +26,7 @@ class Weather extends React.Component {
     render() {
         return (
             <div>
-                This is the weather.
-                <button onClick={this.getLocation}>Get Location</button>
+                <button onClick={this.getWeather}>Current Weather</button>
             </div>
         )
     }
