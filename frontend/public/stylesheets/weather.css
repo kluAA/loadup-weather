@@ -106,3 +106,9 @@
     letter-spacing: 2px;
     margin-right: -3px;
 }
+
+.location {
+    margin-top: 6px;
+    font-weight: 300;
+    font-size: 14px;
+}

@@ -68,6 +68,9 @@ class Weather extends React.Component {
                     <div className="weather-header-right">
                         <h2 className="time">{this.currentTime()}</h2>
                         <span className="date">{this.currentDate()}</span>
+                        <span className="location">
+                            {currentWeather.name + ", " + currentWeather.sys.country}
+                        </span>
                     </div>
 
                 </div>
