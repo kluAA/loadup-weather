@@ -30,7 +30,16 @@ class Weather extends React.Component {
         }
     }
 
-    currentTime(dt) {
+    currentDate() {
+        const days = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
+        let date = new Date();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        let dayOfWeek = days[date.getDay()];
+        return dayOfWeek + " " + month + "/" + day;
+    }
+
+    currentTime() {
         let time = new Date();
         let hours = time.getHours();
         let minutes = time.getMinutes();
@@ -47,16 +56,19 @@ class Weather extends React.Component {
         if (!currentWeather) return null;
         return (
             <div className="weather-info">
-                {/* <h1 className="city">
-                    {currentWeather.name}
-                </h1> */}
                 <div className="weather-header">
-                    <div className="condition">
-                        <img className="weather-icon" src={`http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`}></img>
-                        <span>{currentWeather.weather[0].main}</span>
+                    <div className="weather-header-left">
+                        <div className="condition">
+                            <img className="weather-icon" src={`http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`}></img>
+                            <span>{currentWeather.weather[0].main}</span>
+                        </div>
+                        <h1 className="temperature">{Math.round(currentWeather.main.temp) + "°F"}</h1>
                     </div>
-                    <h1 className="temperature">{Math.round(currentWeather.main.temp) + "°F"}</h1>
-                    <h2 className="time">{this.currentTime()}</h2>
+                    
+                    <div className="weather-header-right">
+                        <h2 className="time">{this.currentTime()}</h2>
+                        <span className="date">{this.currentDate()}</span>
+                    </div>
 
                 </div>
             </div>
