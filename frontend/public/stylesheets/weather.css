@@ -5,6 +5,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+}
+
+#raining {
+    background-image: linear-gradient(#3d4f9c,#5b93af);
 }
 
 .weather-btn {
@@ -21,4 +26,65 @@
 
 .weather-btn:hover {
     opacity: 0.9;
+}
+
+.weather-info {
+    min-height: 555px;
+    width: 900px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.city {
+    
+}
+
+/* .weather-header {
+    color: black;
+    margin-top: 10px;
+    width: 320px;
+    height: 120px;
+    background: white;
+    box-sizing: border-box;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, .3);
+} */
+
+.weather-header {
+    height: 100px;
+    width: 350px;
+    background: #398ee8;
+    box-shadow: 0px 7px 30px 2px rgba(0,0,0,0.18);
+    box-sizing: border-box;
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    
+
+}
+
+.condition {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0px;
+    left: 5px;
+}
+
+.temperature {
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+    font-size: 36px;
+    font-family: Helvetica;
+}
+
+.weather-icon {
+    height: 50px;
+    width: 50px;
+    /* margin-top: -17px; */
 }
