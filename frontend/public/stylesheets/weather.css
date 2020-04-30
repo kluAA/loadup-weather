@@ -63,16 +63,29 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    
+}
 
+.weather-header:hover {
+    opacity: 0.9;
 }
 
 .condition {
     display: flex;
     align-items: center;
     position: absolute;
-    top: 0px;
-    left: 5px;
+    top: 0;
+    left: 0;
+    font-size: 18px;
+}
+
+.weather-icon {
+    height: 50px;
+    width: 50px;
+    /* margin-top: -17px; */
+}
+
+.condition > span {
+    margin-left: -3px;
 }
 
 .temperature {
@@ -83,8 +96,9 @@
     font-family: Helvetica;
 }
 
-.weather-icon {
-    height: 50px;
-    width: 50px;
-    /* margin-top: -17px; */
+.time {
+    position: absolute;
+    top: 13px;
+    right: 15px;
+    font-size: 20px;
 }

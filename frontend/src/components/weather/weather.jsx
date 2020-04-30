@@ -9,6 +9,7 @@ class Weather extends React.Component {
             isLoading: false
         }
         this.getWeather = this.getWeather.bind(this);
+        this.currentTime = this.currentTime.bind(this);
     }
 
     getWeather() {
@@ -29,6 +30,18 @@ class Weather extends React.Component {
         }
     }
 
+    currentTime(dt) {
+        let time = new Date();
+        let hours = time.getHours();
+        let minutes = time.getMinutes();
+        let period = hours < 12 ? "AM" : "PM";
+        hours = hours % 12;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        
+        let timeString = hours + ":" + minutes + " " + period;
+        return timeString;
+    }
+
     weatherInfo() {
         const { currentWeather } = this.props;
         if (!currentWeather) return null;
@@ -43,7 +56,7 @@ class Weather extends React.Component {
                         <span>{currentWeather.weather[0].main}</span>
                     </div>
                     <h1 className="temperature">{Math.round(currentWeather.main.temp) + "°F"}</h1>
-          
+                    <h2 className="time">{this.currentTime()}</h2>
 
                 </div>
             </div>
