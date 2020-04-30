@@ -26,7 +26,7 @@ class Weather extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={this.getWeather}>Current Weather</button>
+                <button className="weather-btn" onClick={this.getWeather}>Current Weather</button>
             </div>
         )
     }

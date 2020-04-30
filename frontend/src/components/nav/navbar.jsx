@@ -7,8 +7,13 @@ class NavBar extends React.Component {
 
     render() {
         return (
-            <div>
-            
+            <div className="nav-wrapper">
+                <nav className="nav-top">
+
+                </nav>
+                <nav className="nav-bottom">
+
+                </nav>
             </div>
         )
     }

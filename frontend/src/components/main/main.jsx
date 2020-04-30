@@ -1,7 +1,6 @@
 import React from 'react';
-import NavBar from "../nav/navbar";
 import WeatherContainer from "../weather/weather_container";
-import Footer from "../footer/footer";
+
 
 class Main extends React.Component {
     constructor(props) {
@@ -10,10 +9,8 @@ class Main extends React.Component {
 
     render() {
         return (
-            <div>
-                <NavBar />
-                <WeatherContainer />
-                <Footer />
+            <div className="main">
+                <WeatherContainer />           
             </div>
         )
     }
