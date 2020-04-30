@@ -1,0 +1,18 @@
+.nav-wrapper {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 999;
+    background: white;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.13);
+}
+
+.nav-top {
+    height: 26px;
+    background: #2b2823;
+}
+
+.nav-bottom {
+    height: 71px;
+    box-sizing: border-box;
+}
