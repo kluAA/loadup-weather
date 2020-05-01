@@ -4,7 +4,7 @@ LoadUp Weather is a weather application that utilizes the Geolocation API to gra
 
 [Live Site](https://loadup-weather.herokuapp.com)
 
-<img src="https://user-images.githubusercontent.com/55899911/80827165-7b295500-8bb1-11ea-902e-c659784b9c36.png" height="400"><img src="https://user-images.githubusercontent.com/55899911/80827178-7f557280-8bb1-11ea-9780-6f662b950979.png" height="400">
+<img src="https://user-images.githubusercontent.com/55899911/80827165-7b295500-8bb1-11ea-902e-c659784b9c36.png" height="400"><img src="https://user-images.githubusercontent.com/55899911/80830895-cd6d7480-8bb7-11ea-89af-0a829685ba0a.png" height="400"><img src="https://user-images.githubusercontent.com/55899911/80827178-7f557280-8bb1-11ea-9780-6f662b950979.png" height="400">
 ## Technologies Used
 * React.js
 * Redux state management
