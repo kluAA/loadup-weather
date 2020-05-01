@@ -118,7 +118,7 @@
     font-size: 14px;
 }
 
-.weather-details, .status {
+.weather-details, .status, .update {
     margin-top: 10px;
     width: 350px;
     background: white;
@@ -137,7 +137,7 @@
     opacity: 0.9;
 }
 
-.weather-details h1, .status h1 {
+.title {
     font-weight: bold;
     color: rgb(3, 139, 139);
     font-size: 18px;
@@ -174,7 +174,7 @@
     font-weight: 400;
 }
 
-.status p {
+.status p, .update p {
     margin-top: 5px;
     color: #474646;
 }

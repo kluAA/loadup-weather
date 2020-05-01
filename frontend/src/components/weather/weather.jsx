@@ -40,6 +40,10 @@ class Weather extends React.Component {
         return dayOfWeek + " " + month + "/" + day;
     }
 
+    getUpdatedDate(dt) {
+        return new Date(dt * 1000).toTimeString();
+    }
+
     currentTime() {
         let time = new Date();
         let hours = time.getHours();
@@ -99,8 +103,9 @@ class Weather extends React.Component {
                 <section 
                     className="weather-details"
                     onClick={e => this.setState({ moreDetails: !this.state.moreDetails })}
+                    id={moreDetails ? "more-details" : null}
                 >
-                    <h1>Details</h1>
+                    <h1 className="title">Details</h1>
                     <h2>{currentWeather.weather[0].description}</h2>
                     <h3>FeelsLike® {Math.round(currentWeather.main.feels_like) + "°F"}{}</h3>
                     <h4>Humidity <span className="details-value">{currentWeather.main.humidity}</span>%</h4>
@@ -120,10 +125,14 @@ class Weather extends React.Component {
                 </section>
 
                 <section className="status">
-                    <h1>Status - <span id="code">{currentWeather.weather[0].id}</span></h1>
+                    <h1 className="title">Status - <span id="code">{currentWeather.weather[0].id}</span></h1>
                     <p>{this.statusMessage(currentWeather.weather[0].id)}</p>
                 </section>
                 
+                <section className="update">
+                    <h1 className="title">Update</h1>
+                    <p>OpenWeather API data for this location was last updated at <i>{this.getUpdatedDate(currentWeather.dt)}</i></p>
+                </section>
             </div>
 
         )
