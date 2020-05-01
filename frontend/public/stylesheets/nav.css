@@ -68,3 +68,17 @@
     font-weight: bold;
     cursor: default;
 }
+
+@media screen and (max-width: 1000px) {
+    .nav-top {
+        display: none;
+    }
+
+    .nav-bottom {
+        height: 60px;
+    }
+
+    .challenge {
+        font-size: 18px;
+    }
+}

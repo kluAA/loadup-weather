@@ -29,3 +29,9 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+@media screen and (max-width: 1000px) {
+   .main {
+       margin-top: 60px;
+   }
+}
