@@ -118,7 +118,7 @@
     font-size: 14px;
 }
 
-.weather-details, .status {
+.weather-details, .status, .update, .settings {
     margin-top: 10px;
     width: 350px;
     background: white;
@@ -129,7 +129,15 @@
     color: black;
 }
 
-.weather-details h1, .status h1 {
+.weather-details {
+    cursor: pointer;
+}
+
+.weather-details:hover {
+    opacity: 0.9;
+}
+
+.title {
     font-weight: bold;
     color: rgb(3, 139, 139);
     font-size: 18px;
@@ -166,7 +174,57 @@
     font-weight: 400;
 }
 
-.status p {
+.status p, .update p {
     margin-top: 5px;
     color: #474646;
+}
+
+#details {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: #696969;
+    font-style: italic;
+    font-weight: 200;
+    font-size: 14px;
+}
+
+#details > .far {
+    margin-left: 3px;
+}
+
+.update-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.resync {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: rgb(134, 206, 230);
+    margin-top: -2px;
+}
+
+.resync:hover {
+    opacity: 0.8;
+}
+
+.settings-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.settings-header button {
+    padding: 3px 12px;
+    border: 1px solid rgba(112, 109, 109, 0.747);
+    border-radius: 5px;
+    font-weight: 500;
+    color: #474646;
+}
+
+#btn-active {
+    background: #398ee8;
+    color: white;
+    border: 1px solid transparent;
 }

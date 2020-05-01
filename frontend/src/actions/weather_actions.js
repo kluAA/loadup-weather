@@ -6,7 +6,7 @@ const receiveWeather = weather => ({
     weather
 });
 
-export const fetchWeatherByCoords = (lat, lon) => dispatch => {
-    return WeatherAPIUtil.fetchWeatherByCoords(lat, lon)
+export const fetchWeatherByCoords = (lat, lon, unit) => dispatch => {
+    return WeatherAPIUtil.fetchWeatherByCoords(lat, lon, unit)
         .then(weather => dispatch(receiveWeather(weather)));
 };
