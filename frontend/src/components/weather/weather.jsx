@@ -7,6 +7,7 @@ class Weather extends React.Component {
             showButton: true,
             showWeather: false,
             isLoading: false,
+            moreDetails: false
         }
         this.getWeather = this.getWeather.bind(this);
         this.currentTime = this.currentTime.bind(this);
@@ -73,6 +74,7 @@ class Weather extends React.Component {
 
     weatherInfo() {
         const { currentWeather } = this.props;
+        const { moreDetails } = this.state;
         if (!currentWeather) return null;
         return (
             <div className="weather-info">
@@ -94,12 +96,27 @@ class Weather extends React.Component {
                     </div>
                 </section>
 
-                <section className="weather-details">
+                <section 
+                    className="weather-details"
+                    onClick={e => this.setState({ moreDetails: !this.state.moreDetails })}
+                >
                     <h1>Details</h1>
                     <h2>{currentWeather.weather[0].description}</h2>
                     <h3>FeelsLike® {Math.round(currentWeather.main.feels_like) + "°F"}{}</h3>
                     <h4>Humidity <span className="details-value">{currentWeather.main.humidity}</span>%</h4>
                     <h4>Wind Speed <span className="details-value">{currentWeather.wind.speed}</span> mph</h4>
+                    { moreDetails && 
+                       <React.Fragment>
+                            <h4>Wind Direction <span className="details-value">{currentWeather.wind.deg}</span>°</h4>
+                            <h4>Atmospheric Pressure <span className="details-value">{currentWeather.main.pressure}</span> hpa</h4>
+                            <h4>Lon: <span className="details-value">{currentWeather.coord.lon}</span>°
+                                Lat: <span className="details-value">{currentWeather.coord.lat}</span>°
+                            </h4>
+                            <h4>Min Temp <span className="details-value">{currentWeather.main.temp_min}</span>°F</h4>
+                            <h4>Max Temp <span className="details-value">{currentWeather.main.temp_max}</span>°F</h4>
+                       </React.Fragment>
+                    }
+                    <div id="details">{moreDetails ? "less details" : "more details"} <i className="far fa-arrow-alt-circle-right"></i></div>
                 </section>
 
                 <section className="status">

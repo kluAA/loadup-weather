@@ -129,6 +129,14 @@
     color: black;
 }
 
+.weather-details {
+    cursor: pointer;
+}
+
+.weather-details:hover {
+    opacity: 0.9;
+}
+
 .weather-details h1, .status h1 {
     font-weight: bold;
     color: rgb(3, 139, 139);
@@ -169,4 +177,18 @@
 .status p {
     margin-top: 5px;
     color: #474646;
+}
+
+#details {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: #696969;
+    font-style: italic;
+    font-weight: 200;
+    font-size: 14px;
+}
+
+#details > .far {
+    margin-left: 3px;
 }
