@@ -183,14 +183,18 @@ class Weather extends React.Component {
         const { showButton, showWeather, isLoading } = this.state;
         const { currentWeather } = this.props;
         const currentWeatherBtn = (
-            <button className="weather-btn" onClick={this.getWeather}>
-                <i className="fas fa-cloud-sun-rain"></i> Current Weather
-            </button>
+            <div className="check-weather">
+                <h1>Check Online</h1>
+                <h2>Click on the button below to check weather conditions in your area.</h2>
+                <button className="weather-btn" onClick={this.getWeather}>
+                    <i className="fas fa-cloud-sun-rain"></i> Current Weather
+                </button>
+            </div>
         );
  
         return (
             <div className="weather-container"
-                id={currentWeather.weather ? "raining" : null}
+                id={currentWeather.weather ? "default-bg" : null}
             >
                 { showButton && currentWeatherBtn }
                 { isLoading && <Loading /> }
