@@ -3,11 +3,18 @@ import React from 'react';
 class Weather extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            showButton: true,
+            showWeather: false,
+            isLoading: false,
+        }
         this.getWeather = this.getWeather.bind(this);
+        this.currentTime = this.currentTime.bind(this);
     }
 
     getWeather() {
         if (navigator.geolocation) {
+            this.setState({ showButton: false, showWeather: false, isLoading: true})
             // grabs lat, lon coords
             navigator.geolocation.getCurrentPosition(position => {
                 const lat = position.coords.latitude;
@@ -15,7 +22,7 @@ class Weather extends React.Component {
 
                 //api request to fetch current weather data
                 this.props.fetchWeatherByCoords(lat, lon)
-                    .then(weather => console.log(weather));
+                    .then(weather => this.setState({isLoading: false, showWeather: true}));
             });
         } 
         else {
@@ -23,12 +30,115 @@ class Weather extends React.Component {
         }
     }
 
-    render() {
+    currentDate() {
+        const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+        let date = new Date();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        let dayOfWeek = days[date.getDay()];
+        return dayOfWeek + " " + month + "/" + day;
+    }
+
+    currentTime() {
+        let time = new Date();
+        let hours = time.getHours();
+        let minutes = time.getMinutes();
+        let period = hours < 12 ? "AM" : "PM";
+        hours = hours % 12 === 0 ? 12 : hours % 12;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        
+        let timeString = hours + ":" + minutes + " " + period;
+        return timeString;
+    }
+
+    statusMessage(id) {
+        const firstDigit = id.toString()[0];
+        const prefix = `A status of ${firstDigit}xx indicates`
+        switch(firstDigit) {
+            case '8':
+                return `${prefix} good weather. Services should be operating without any problems from weather.`;
+            case '7':
+                return `${prefix} potentially dangerous weather. Please stay indoors. Services are most likely closed.`;
+            case '6':
+                return `${prefix} snowy weather. Services may be disrupted or additional fees for priority service.`;
+            case '5':
+                return `${prefix} rainy weather. Services may be disrupted or additional fees for priority service.`;
+            // there are no 4xx status codes
+            case '3':
+                return `${prefix} drizzling weather. Services should be operating without any problems.`;
+            case '2':
+                return `${prefix} thunderstorms in the area. Services may be disrupted. Please stay indoors.`;
+        }
+    }
+
+    weatherInfo() {
+        const { currentWeather } = this.props;
+        if (!currentWeather) return null;
         return (
-            <div>
-                <button onClick={this.getWeather}>Current Weather</button>
+            <div className="weather-info">
+                <section className="weather-header">
+                    <div className="weather-header-left">
+                        <div className="condition">
+                            <img className="weather-icon" src={`http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`}></img>
+                            <span>{currentWeather.weather[0].main}</span>
+                        </div>
+                        <h1 className="temperature">{Math.round(currentWeather.main.temp) + "°F"}</h1>
+                    </div>
+                    
+                    <div className="weather-header-right">
+                        <h2 className="time">{this.currentTime()}</h2>
+                        <span className="date">{this.currentDate()}</span>
+                        <span className="location">
+                            {currentWeather.name + ", " + currentWeather.sys.country}
+                        </span>
+                    </div>
+                </section>
+
+                <section className="weather-details">
+                    <h1>Details</h1>
+                    <h2>{currentWeather.weather[0].description}</h2>
+                    <h3>FeelsLike® {Math.round(currentWeather.main.feels_like) + "°F"}{}</h3>
+                    <h4>Humidity <span className="details-value">{currentWeather.main.humidity}</span>%</h4>
+                    <h4>Wind Speed <span className="details-value">{currentWeather.wind.speed}</span> mph</h4>
+                </section>
+
+                <section className="status">
+                    <h1>Status - <span id="code">{currentWeather.weather[0].id}</span></h1>
+                    <p>{this.statusMessage(currentWeather.weather[0].id)}</p>
+                </section>
+                
             </div>
+
         )
+    }
+
+    render() {
+        const { showButton, showWeather, isLoading } = this.state;
+        const { currentWeather } = this.props;
+        const currentWeatherBtn = (
+            <button className="weather-btn" onClick={this.getWeather}>
+                <i className="fas fa-cloud-sun-rain"></i> Current Weather
+            </button>
+        );
+
+        const loading = (
+            <div className="loading">
+                <span>Fetching Weather Data</span>
+                <div className="spinner">
+
+                </div>
+            </div>
+        );
+ 
+        return (
+            <div className="weather-container"
+                id={currentWeather.weather ? "raining" : null}
+            >
+                { showButton && currentWeatherBtn }
+                { isLoading && loading }
+                { showWeather && this.weatherInfo()}
+            </div>
+        );
     }
 }
 

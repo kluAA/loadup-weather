@@ -1,12 +1,17 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import WeatherContainer from "./components/weather/weather_container";
+import NavBar from "./components/nav/navbar";
+import Main from "./components/main/main";
+import Footer from "./components/footer/footer";
+
 
 const App = () => (
   <div>
+    <NavBar />
     <Switch>
-        <Route path="/" component={WeatherContainer} />
+        <Route path="/" component={Main} />
     </Switch>
+    <Footer />
   </div>
 );
 

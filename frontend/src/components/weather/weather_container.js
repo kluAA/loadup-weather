@@ -3,7 +3,7 @@ import { fetchWeatherByCoords } from "../../actions/weather_actions";
 import Weather from "./weather";
 
 const mapStateToProps = state => ({
-    weather: state.entities.weather
+    currentWeather: state.entities.weather
 });
 
 const mapDispatchToProps = dispatch => ({
