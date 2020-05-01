@@ -9,9 +9,11 @@ class Weather extends React.Component {
             showWeather: false,
             isLoading: false,
             moreDetails: false,
-            unit: "imperial"
+            unit: "imperial",
+            zipcode: ""
         }
         this.getWeather = this.getWeather.bind(this);
+        this.getWeatherByZip = this.getWeatherByZip.bind(this);
         this.currentTime = this.currentTime.bind(this);
         this.setUnit = this.setUnit.bind(this);
     }
@@ -33,6 +35,13 @@ class Weather extends React.Component {
         else {
             console.log("Geolocation is not supported!")
         }
+    }
+
+    getWeatherByZip(e) {
+        e.preventDefault();
+        this.setState({ isLoading: true, showWeather: false });
+        this.props.fetchWeatherByZip(this.state.zipcode, this.state.unit)
+            .then(() => this.setState({isLoading: false, showWeather: true, zipcode: ""}))
     }
 
     currentDate() {
@@ -104,78 +113,94 @@ class Weather extends React.Component {
 
     weatherInfo() {
         const { currentWeather } = this.props;
-        const { moreDetails, unit } = this.state;
+        const { moreDetails, unit, zipcode } = this.state;
         if (!currentWeather) return null;
         return (
-            <div className="weather-info">
-                <section className="weather-header">
-                    <div className="weather-header-left">
-                        <div className="condition">
-                            <img className="weather-icon" src={`http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`}></img>
-                            <span>{currentWeather.weather[0].main}</span>
+            <div className="weather-wrapper">
+                <div className="weather-info">
+                    <section className="weather-header">
+                        <div className="weather-header-left">
+                            <div className="condition">
+                                <img className="weather-icon" src={`http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`}></img>
+                                <span>{currentWeather.weather[0].main}</span>
+                            </div>
+                            <h1 className="temperature">{Math.round(currentWeather.main.temp) + this.returnUnit("temp")}</h1>
                         </div>
-                        <h1 className="temperature">{Math.round(currentWeather.main.temp) + this.returnUnit("temp")}</h1>
-                    </div>
+                        
+                        <div className="weather-header-right">
+                            <h2 className="time">{this.currentTime()}</h2>
+                            <span className="date">{this.currentDate()}</span>
+                            <span className="location">
+                                {currentWeather.name + ", " + currentWeather.sys.country}
+                            </span>
+                        </div>
+                    </section>
+
+                    <section 
+                        className="weather-details"
+                        onClick={e => this.setState({ moreDetails: !this.state.moreDetails })}
+                        id={moreDetails ? "more-details" : null}
+                    >
+                        <h1 className="title">Details</h1>
+                        <h2>{currentWeather.weather[0].description}</h2>
+                        <h3>FeelsLike® {Math.round(currentWeather.main.feels_like) + this.returnUnit("temp")}{}</h3>
+                        <h4>Humidity <span className="details-value">{currentWeather.main.humidity}</span>%</h4>
+                        <h4>Wind Speed <span className="details-value">{currentWeather.wind.speed}</span> {this.returnUnit("wind")}</h4>
+                        { moreDetails && 
+                        <React.Fragment>
+                                <h4>Wind Direction <span className="details-value">{currentWeather.wind.deg}</span>°</h4>
+                                <h4>Atmospheric Pressure <span className="details-value">{currentWeather.main.pressure}</span> hpa</h4>
+                                <h4>Lon: <span className="details-value">{currentWeather.coord.lon}</span>°
+                                    Lat: <span className="details-value">{currentWeather.coord.lat}</span>°
+                                </h4>
+                                <h4>Min Temp <span className="details-value">{currentWeather.main.temp_min}</span>{this.returnUnit("temp")}</h4>
+                                <h4>Max Temp <span className="details-value">{currentWeather.main.temp_max}</span>{this.returnUnit("temp")}</h4>
+                        </React.Fragment>
+                        }
+                        <div id="details">{moreDetails ? "less details" : "more details"} <i className="far fa-arrow-alt-circle-right"></i></div>
+                    </section>
+
+                    <section className="status">
+                        <h1 className="title">Status - <span id="code">{currentWeather.weather[0].id}</span></h1>
+                        <p>{this.statusMessage(currentWeather.weather[0].id)}</p>
+                    </section>
                     
-                    <div className="weather-header-right">
-                        <h2 className="time">{this.currentTime()}</h2>
-                        <span className="date">{this.currentDate()}</span>
-                        <span className="location">
-                            {currentWeather.name + ", " + currentWeather.sys.country}
-                        </span>
-                    </div>
-                </section>
+                    <section className="update">
+                        <div className="update-header">
+                            <h1 className="title">Update</h1>
+                            <button className="resync"
+                                onClick={this.getWeather}
+                            >
+                                <i className="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                        <p>OpenWeather API data for this location was last updated at <i>{this.getUpdatedDate(currentWeather.dt)}</i></p>
+                    </section>
 
-                <section 
-                    className="weather-details"
-                    onClick={e => this.setState({ moreDetails: !this.state.moreDetails })}
-                    id={moreDetails ? "more-details" : null}
-                >
-                    <h1 className="title">Details</h1>
-                    <h2>{currentWeather.weather[0].description}</h2>
-                    <h3>FeelsLike® {Math.round(currentWeather.main.feels_like) + this.returnUnit("temp")}{}</h3>
-                    <h4>Humidity <span className="details-value">{currentWeather.main.humidity}</span>%</h4>
-                    <h4>Wind Speed <span className="details-value">{currentWeather.wind.speed}</span> {this.returnUnit("wind")}</h4>
-                    { moreDetails && 
-                       <React.Fragment>
-                            <h4>Wind Direction <span className="details-value">{currentWeather.wind.deg}</span>°</h4>
-                            <h4>Atmospheric Pressure <span className="details-value">{currentWeather.main.pressure}</span> hpa</h4>
-                            <h4>Lon: <span className="details-value">{currentWeather.coord.lon}</span>°
-                                Lat: <span className="details-value">{currentWeather.coord.lat}</span>°
-                            </h4>
-                            <h4>Min Temp <span className="details-value">{currentWeather.main.temp_min}</span>{this.returnUnit("temp")}</h4>
-                            <h4>Max Temp <span className="details-value">{currentWeather.main.temp_max}</span>{this.returnUnit("temp")}</h4>
-                       </React.Fragment>
-                    }
-                    <div id="details">{moreDetails ? "less details" : "more details"} <i className="far fa-arrow-alt-circle-right"></i></div>
-                </section>
-
-                <section className="status">
-                    <h1 className="title">Status - <span id="code">{currentWeather.weather[0].id}</span></h1>
-                    <p>{this.statusMessage(currentWeather.weather[0].id)}</p>
-                </section>
-                
-                <section className="update">
-                    <div className="update-header">
-                        <h1 className="title">Update</h1>
-                        <button className="resync"
-                            onClick={this.getWeather}
-                        >
-                            <i className="fas fa-sync-alt"></i>
-                        </button>
-                    </div>
-                    <p>OpenWeather API data for this location was last updated at <i>{this.getUpdatedDate(currentWeather.dt)}</i></p>
-                </section>
-
-                <section className="settings">
-                    <div className="settings-header">
-                        <h1 className="title">Settings</h1>
-                        <button id={unit === "imperial" ? "btn-active" : null} onClick={this.setUnit("imperial")}>Imperial</button>
-                        <button id={unit === "metric" ? "btn-active" : null} onClick={this.setUnit("metric")}>Metric</button>
-                    </div>
+                    <section className="settings">
+                        <div className="settings-header">
+                            <h1 className="title">Settings</h1>
+                            <button id={unit === "imperial" ? "btn-active" : null} onClick={this.setUnit("imperial")}>Imperial</button>
+                            <button id={unit === "metric" ? "btn-active" : null} onClick={this.setUnit("metric")}>Metric</button>
+                        </div>
+                    </section>
+                </div>
+                <section className="zipcode">
+                        <div className="zipcode-wrapper">
+                            <h1 className="title">Use Zipcode</h1>
+                            <div className="search">
+                                <input type="text" 
+                                    placeholder="Enter US Zipcode"
+                                    value={zipcode}
+                                    onChange={e => this.setState({ zipcode: e.target.value })}
+                                />
+                                <button onClick={this.getWeatherByZip} className="search-btn">
+                                    <i className="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
                 </section>
             </div>
-
         )
     }
 

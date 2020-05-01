@@ -56,14 +56,19 @@
     opacity: 0.9;
 }
 
-.weather-info {
+.weather-wrapper {
     min-height: 555px;
-    width: 900px;
+    width: 800px;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.weather-info {
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px 0;
 }
 
 .weather-header {
@@ -140,7 +145,7 @@
     font-size: 14px;
 }
 
-.weather-details, .status, .update, .settings {
+.weather-details, .status, .update, .settings, .zipcode {
     margin-top: 10px;
     width: 350px;
     background: white;
@@ -196,7 +201,7 @@
     font-weight: 400;
 }
 
-.status p, .update p {
+.status p, .update p, .zipcode p {
     margin-top: 5px;
     color: #474646;
 }
@@ -251,3 +256,43 @@
     border: 1px solid transparent;
 }
 
+.zipcode {
+    display: flex;
+    flex-direction: column;
+    height: 50px;
+    margin-top: 20%;
+}
+
+.zipcode-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search {
+    position: relative;
+}
+
+.search input {
+    padding: 5px 10px;
+    padding-right: 58px;
+    border: 2px solid #e0e2e4;
+    border-radius: 3px;
+    width: 200px;
+    box-sizing: border-box;
+}
+
+.search-btn {
+    position: absolute;
+    right: 0;
+    height: 32px;
+    padding: 0 19px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    color: white;
+    background: rgb(3, 139, 139);
+}
+
+.search-btn:hover {
+    opacity: 0.9;
+}

@@ -9,3 +9,11 @@ export const fetchWeatherByCoords = (lat, lon, unit) => {
         data: { lat, lon, unit}
     })
 }
+
+export const fetchWeatherByZip = (zipcode, unit) => {
+    return $.ajax({
+        url: `/api/weather/byzipcode`,
+        method: "GET",
+        data: { zipcode, unit }
+    })
+}

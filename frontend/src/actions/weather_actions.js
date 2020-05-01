@@ -10,3 +10,8 @@ export const fetchWeatherByCoords = (lat, lon, unit) => dispatch => {
     return WeatherAPIUtil.fetchWeatherByCoords(lat, lon, unit)
         .then(weather => dispatch(receiveWeather(weather)));
 };
+
+export const fetchWeatherByZip = (zipcode, unit) => dispatch => {
+    return WeatherAPIUtil.fetchWeatherByZip(zipcode, unit)
+        .then(weather => dispatch(receiveWeather(weather)));
+};

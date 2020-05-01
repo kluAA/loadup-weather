@@ -14,4 +14,12 @@ router.get('/bycoords', (req, res) => {
     // res.status(200).json({ msg: `you made it` });
 })
 
+router.get('/byzipcode', (req, res) => {
+    const { zipcode, unit } = req.query;
+    axios.get(`http://api.openweathermap.org/data/2.5/weather?zip=${zipcode}&appid=${weatherAPI}&units=${unit}`)
+        .then(weatherData => {
+            res.send(weatherData.data);
+        })
+})
+
 module.exports = router;
