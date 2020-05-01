@@ -192,3 +192,19 @@
 #details > .far {
     margin-left: 3px;
 }
+
+.update-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.resync {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: rgb(134, 206, 230);
+    margin-top: -2px;
+}
+
+.resync:hover {
+    opacity: 0.8;
+}

@@ -13,7 +13,8 @@ class Weather extends React.Component {
         this.currentTime = this.currentTime.bind(this);
     }
 
-    getWeather() {
+    getWeather(e) {
+        e.preventDefault();
         if (navigator.geolocation) {
             this.setState({ showButton: false, showWeather: false, isLoading: true})
             // grabs lat, lon coords
@@ -130,7 +131,14 @@ class Weather extends React.Component {
                 </section>
                 
                 <section className="update">
-                    <h1 className="title">Update</h1>
+                    <div className="update-header">
+                        <h1 className="title">Update</h1>
+                        <button className="resync"
+                            onClick={this.getWeather}
+                        >
+                            <i className="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
                     <p>OpenWeather API data for this location was last updated at <i>{this.getUpdatedDate(currentWeather.dt)}</i></p>
                 </section>
             </div>
