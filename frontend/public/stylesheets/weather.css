@@ -118,7 +118,7 @@
     font-size: 14px;
 }
 
-.weather-details {
+.weather-details, .status {
     margin-top: 10px;
     width: 350px;
     background: white;
@@ -129,10 +129,11 @@
     color: black;
 }
 
-.weather-details h1 {
+.weather-details h1, .status h1 {
     font-weight: bold;
     color: rgb(3, 139, 139);
     font-size: 18px;
+    text-transform: uppercase;
 }
 
 .weather-details h2 {
@@ -158,4 +159,14 @@
 .details-value {
     font-weight: 500;
     color: black;
+}
+
+#code {
+    color: black;
+    font-weight: 400;
+}
+
+.status p {
+    margin-top: 5px;
+    color: #474646;
 }
