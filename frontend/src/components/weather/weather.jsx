@@ -6,7 +6,7 @@ class Weather extends React.Component {
         this.state = {
             showButton: true,
             showWeather: false,
-            isLoading: false
+            isLoading: false,
         }
         this.getWeather = this.getWeather.bind(this);
         this.currentTime = this.currentTime.bind(this);
@@ -44,7 +44,7 @@ class Weather extends React.Component {
         let hours = time.getHours();
         let minutes = time.getMinutes();
         let period = hours < 12 ? "AM" : "PM";
-        hours = hours % 12;
+        hours = hours % 12 === 0 ? 12 : hours % 12;
         minutes = minutes < 10 ? "0" + minutes : minutes;
         
         let timeString = hours + ":" + minutes + " " + period;
@@ -56,7 +56,7 @@ class Weather extends React.Component {
         if (!currentWeather) return null;
         return (
             <div className="weather-info">
-                <div className="weather-header">
+                <section className="weather-header">
                     <div className="weather-header-left">
                         <div className="condition">
                             <img className="weather-icon" src={`http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`}></img>
@@ -72,8 +72,16 @@ class Weather extends React.Component {
                             {currentWeather.name + ", " + currentWeather.sys.country}
                         </span>
                     </div>
+                </section>
 
-                </div>
+                <section className="weather-details">
+                    <h1>DETAILS</h1>
+                    <h2>{currentWeather.weather[0].description}</h2>
+                    <h3>FeelsLike® {Math.round(currentWeather.main.feels_like) + "°F"}{}</h3>
+                    <h4>Humidity <span className="details-value">{currentWeather.main.humidity}</span>%</h4>
+                    <h4>Wind Speed <span className="details-value">{currentWeather.wind.speed}</span> mph</h4>
+                </section>
+                
             </div>
 
         )
