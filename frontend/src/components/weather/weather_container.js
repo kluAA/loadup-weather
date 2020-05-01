@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    fetchWeatherByCoords: (lat, lon) => dispatch(fetchWeatherByCoords(lat,lon))
+    fetchWeatherByCoords: (lat, lon, unit) => dispatch(fetchWeatherByCoords(lat, lon, unit))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Weather);

@@ -118,7 +118,7 @@
     font-size: 14px;
 }
 
-.weather-details, .status, .update {
+.weather-details, .status, .update, .settings {
     margin-top: 10px;
     width: 350px;
     background: white;
@@ -207,4 +207,24 @@
 
 .resync:hover {
     opacity: 0.8;
+}
+
+.settings-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.settings-header button {
+    padding: 3px 12px;
+    border: 1px solid rgba(112, 109, 109, 0.747);
+    border-radius: 5px;
+    font-weight: 500;
+    color: #474646;
+}
+
+#btn-active {
+    background: #398ee8;
+    color: white;
+    border: 1px solid transparent;
 }
