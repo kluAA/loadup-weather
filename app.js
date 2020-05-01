@@ -1,6 +1,7 @@
 const express = require("express");
 const weather = require("./routes/api/weather");
 const app = express();
+const path = require('path');
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('frontend/build'));
