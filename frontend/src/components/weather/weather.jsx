@@ -1,4 +1,5 @@
 import React from 'react';
+import Loading from "../main/loading";
 
 class Weather extends React.Component {
     constructor(props) {
@@ -26,7 +27,7 @@ class Weather extends React.Component {
 
                 //api request to fetch current weather data
                 this.props.fetchWeatherByCoords(lat, lon, this.state.unit)
-                    .then(weather => this.setState({isLoading: false, showWeather: true}));
+                    .then(() => this.setState({isLoading: false, showWeather: true}));
             });
         } 
         else {
@@ -186,22 +187,13 @@ class Weather extends React.Component {
                 <i className="fas fa-cloud-sun-rain"></i> Current Weather
             </button>
         );
-
-        const loading = (
-            <div className="loading">
-                <span>Fetching Weather Data</span>
-                <div className="spinner">
-
-                </div>
-            </div>
-        );
  
         return (
             <div className="weather-container"
                 id={currentWeather.weather ? "raining" : null}
             >
                 { showButton && currentWeatherBtn }
-                { isLoading && loading }
+                { isLoading && <Loading /> }
                 { showWeather && this.weatherInfo()}
             </div>
         );
