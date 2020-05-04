@@ -29,7 +29,8 @@ class Weather extends React.Component {
 
                 //api request to fetch current weather data
                 this.props.fetchWeatherByCoords(lat, lon, this.state.unit)
-                    .then(() => this.setState({isLoading: false, showWeather: true}));
+                    .then(() => this.setState({isLoading: false, showWeather: true}))
+                    .catch(err => console.log(err));
             });
         } 
         else {
@@ -42,6 +43,7 @@ class Weather extends React.Component {
         this.setState({ isLoading: true, showWeather: false });
         this.props.fetchWeatherByZip(this.state.zipcode, this.state.unit)
             .then(() => this.setState({isLoading: false, showWeather: true, zipcode: ""}))
+            .catch(err => console.log(err))
     }
 
     currentDate() {

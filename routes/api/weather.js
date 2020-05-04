@@ -10,8 +10,9 @@ router.get('/bycoords', (req, res) => {
     .then(weatherData => {
         res.send(weatherData.data);
     })
-    // .error( err => console.log(err))
-    // res.status(200).json({ msg: `you made it` });
+   .catch(err => {
+       res.status(401).json({ msg: "Could not find data based on coords."})
+   })
 })
 
 router.get('/byzipcode', (req, res) => {
@@ -20,6 +21,9 @@ router.get('/byzipcode', (req, res) => {
         .then(weatherData => {
             res.send(weatherData.data);
         })
+        .catch(err => {
+            res.status(401).json({ msg: "Invalid zip code!"})
+        });
 })
 
 module.exports = router;
