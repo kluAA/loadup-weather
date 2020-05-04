@@ -292,6 +292,14 @@
     background: rgb(3, 139, 139);
 }
 
+.green {
+    background: #8ac646;
+}
+
+.check-weather .search {
+    margin-top: 10px;
+}
+
 .search-btn:hover {
     opacity: 0.9;
 }
