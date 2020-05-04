@@ -1,6 +1,6 @@
 import * as WeatherAPIUtil from "../util/weather_util";
 export const RECEIVE_WEATHER = 'RECEIVE_WEATHER';
-export const RECEIVE_WEATHER_ERROR = 'RECEIVE_WEATHER_ERROR'
+export const RECEIVE_WEATHER_ERROR = 'RECEIVE_WEATHER_ERROR';
 
 const receiveWeather = weather => ({
     type: RECEIVE_WEATHER,

@@ -18,6 +18,7 @@ class Weather extends React.Component {
         this.setUnit = this.setUnit.bind(this);
     }
 
+
     getWeather(e) {
         e.preventDefault();
         if (navigator.geolocation) {
@@ -30,7 +31,9 @@ class Weather extends React.Component {
                 //api request to fetch current weather data
                 this.props.fetchWeatherByCoords(lat, lon, this.state.unit)
                     .then(() => this.setState({isLoading: false, showWeather: true}))
-                    .catch(err => console.log(err));
+                    .catch(err => {
+
+                    });
             });
         } 
         else {
@@ -40,10 +43,11 @@ class Weather extends React.Component {
 
     getWeatherByZip(e) {
         e.preventDefault();
+        if (!this.state.zipcode) return;
         this.setState({ isLoading: true, showWeather: false });
         this.props.fetchWeatherByZip(this.state.zipcode, this.state.unit)
             .then(() => this.setState({isLoading: false, showWeather: true, zipcode: ""}))
-            .catch(err => console.log(err.responseJSON.msg))
+            .catch(err => this.setState({isLoading: false, showWeather: true}))
     }
 
     currentDate() {
@@ -114,7 +118,7 @@ class Weather extends React.Component {
     }
 
     weatherInfo() {
-        const { currentWeather } = this.props;
+        const { currentWeather, errorMsg } = this.props;
         const { moreDetails, unit, zipcode } = this.state;
         if (!currentWeather) return null;
         return (
@@ -187,20 +191,21 @@ class Weather extends React.Component {
                         </div>
                     </section>
                 </div>
-                <section className="zipcode">
-                        <div className="zipcode-wrapper">
-                            <h1 className="title">Use Zipcode</h1>
-                            <div className="search">
-                                <input type="text" 
-                                    placeholder="Enter US Zipcode"
-                                    value={zipcode}
-                                    onChange={e => this.setState({ zipcode: e.target.value })}
-                                />
-                                <button onClick={this.getWeatherByZip} className="search-btn">
-                                    <i className="fas fa-search"></i>
-                                </button>
-                            </div>
+                <section className="zipcode-container">
+                    <div className="zipcode">
+                        <h1 className="title">Use Zipcode</h1>
+                        <div className="search">
+                            <input type="text" 
+                                placeholder="Enter US Zipcode"
+                                value={zipcode}
+                                onChange={e => this.setState({ zipcode: e.target.value })}
+                            />
+                            <button onClick={this.getWeatherByZip} className="search-btn">
+                                <i className="fas fa-search"></i>
+                            </button>
                         </div>
+                    </div>
+                    {errorMsg && <span className="zip-error">{errorMsg}</span>}
                 </section>
             </div>
         )
@@ -216,6 +221,7 @@ class Weather extends React.Component {
                 <button className="weather-btn" onClick={this.getWeather}>
                     <i className="fas fa-cloud-sun-rain"></i> Current Weather
                 </button>
+                
             </div>
         );
  

@@ -22,7 +22,7 @@ router.get('/byzipcode', (req, res) => {
             res.send(weatherData.data);
         })
         .catch(err => {
-            res.status(401).json({ msg: "Invalid zip code!"})
+            res.status(401).json({ msg: "Invalid US zip code!"})
         });
 })
 
