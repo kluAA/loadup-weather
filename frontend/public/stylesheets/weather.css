@@ -309,3 +309,16 @@
     color: rgb(248, 45, 45);
     font-weight: 500;
 }
+
+
+@media screen and (max-width: 1000px) {
+    .weather-wrapper {
+        flex-direction: column;
+    }
+
+    .zipcode-container {
+        margin-top: 0;
+        display: flex;
+        align-items: center;
+    }
+}
