@@ -43,7 +43,7 @@ class Weather extends React.Component {
         this.setState({ isLoading: true, showWeather: false });
         this.props.fetchWeatherByZip(this.state.zipcode, this.state.unit)
             .then(() => this.setState({isLoading: false, showWeather: true, zipcode: ""}))
-            .catch(err => console.log(err))
+            .catch(err => console.log(err.responseJSON.msg))
     }
 
     currentDate() {
