@@ -34,7 +34,7 @@ A series of three API calls are used to grab the weather data.
 Google deprecated HTML5 Geolocation from Chrome in 2016 to only run in HTTPS. Upgrading Heroku was necessary to obtain the SSL certificate. Future updates should use Google's geolocation api instead. An Express route was used instead of directly accessing the OpenWeather API in order to protect the API key in the backend.
 
 ## Future Updates
-~~* Optional API call using zip code instead of gps location (in progress)~~
-~~* Error handling for disabled Geolocation and bad API calls~~
+* ~~Optional API call using zip code instead of gps location (in progress)~~
+* ~~Error handling for disabled Geolocation and bad API calls~~
 * Dynamic background and animation based on current weather status
 * Fully mobile responsive design (currently semiresponsive)
